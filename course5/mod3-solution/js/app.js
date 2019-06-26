@@ -7,6 +7,7 @@
     .constant('ApiBasePath', "https://davids-restaurant.herokuapp.com/")
     .directive('foundItems', FoundItemsDirective);
 
+  // FoundItemsDirective.$inject = [];
   function FoundItemsDirective() {
     var ddo = {
       templateUrl: 'foundItems.html',
@@ -14,7 +15,7 @@
         found: '<',
         onRemove: '&'
       },
-      controller: FoundItemsDirectiveController,
+      controller: FoundItemsController,
       controllerAs: 'list',
       bindToController: true
     };
@@ -22,14 +23,14 @@
     return ddo;
   }
 
-  function FoundItemsDirectiveController() {
+  function FoundItemsController() {
     var list = this;
     console.log(list);
     // list.cookiesInList = function () {
     //   for (var i = 0; i < list.items.length; i++) {
     //     var name = list.items[i].name;
     //     if (name.toLowerCase().indexOf("cookie") !== -1) {
-    //       return true;
+          return true;
     //     }
     //   }
     //
@@ -43,14 +44,20 @@
     var list = this;
     list.found = [];
     list.searchItems = function (searchTerm) {
+      list.found = [];
       console.log(searchTerm);
-      list.found = MenuSearchService.getMatchedMenuItems(searchTerm);
-      console.log(list.found)
+      if (!(searchTerm === undefined) && !(searchTerm === '')) {
+        MenuSearchService.getMatchedMenuItems(searchTerm)
+        .then(function (response) {
+          list.found = response;
+        });
+      }
+      // console.log(list.found)
     };
     list.removeItem = function (itemIndex) {
       list.found.splice(itemIndex, 1);
     };
-    // console.log(list)
+    // console.log(list.found.length)
   };
 
   MenuSearchService.$inject = ['$http', 'ApiBasePath'];
@@ -68,8 +75,10 @@
           var searchTermLower = searchTerm.toLowerCase();
           // console.log(result.data.menu_items);
           for (var i = 0; i < result.data.menu_items.length; i++) {
-            if (result.data.menu_items[i].description.toLowerCase().indexOf(searchTermLower)!==-1) {
-              foundItems.push(result.data.menu_items[i]);
+            var menuItem = result.data.menu_items[i];
+            if (menuItem.description.toLowerCase().indexOf(searchTermLower)!==-1) {
+              foundItems.push(menuItem);
+              // console.log(menuItem);
             }
           };
           // console.log(foundItems);

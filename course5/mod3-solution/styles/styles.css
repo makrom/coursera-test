@@ -2,12 +2,20 @@ h1 {
   margin-bottom: 30px;
 }
 input[type="text"] {
-  width: 200px;
-  float: left;
+  /* width: 200px; */
+  width: 100%;
+  /* float: left; */
+}
+.bordered-bottom {
+  border-bottom: 1px solid rgba(147, 147, 147, 0.2);
+}
+.bordered-left {
+  border-left: 1px solid rgba(147, 147, 147, 0.2);
 }
 .narrow-button {
-  float: left;
-  margin-left: 10px;
+  /* float: left;
+  margin-left: 10px; */
+  width: 100%;
 }
 .loader {
   display: none;
