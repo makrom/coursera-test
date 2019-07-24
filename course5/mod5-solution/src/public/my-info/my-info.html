@@ -1,0 +1,21 @@
+<div id="my-info-container" class="container">
+  <h2 id="myinfo-title" class="text-center">My Info</h2>
+  <div ng-if="!(myInfoCtrl.userInfo === undefined)">
+    <div class="text-center">
+      Registered information:
+    </div>
+    <ul>
+      <li>First name: {{ myInfoCtrl.userInfo.firstName }}</li>
+      <li>Last name: {{ myInfoCtrl.userInfo.lastName }}</li>
+      <li>E-mail address: {{ myInfoCtrl.userInfo.emailAddress }}</li>
+      <li>Phone number: {{ myInfoCtrl.userInfo.phoneNumber }}</li>
+      <li>Favourite menu item: {{ myInfoCtrl.userInfo.menuNumber }}</li>
+    </ul>
+  </div>
+  <div class="red" ng-if="(myInfoCtrl.userInfo === undefined)">
+    <div class="text-center">
+      Not Signed Up Yet.
+      <a ui-sref="public.signup">Sign Up Now!</a>
+    </div>
+  </div>
+</div>
