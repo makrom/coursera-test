@@ -4,16 +4,12 @@
 angular.module('public')
 .controller('MyInfoController', MyInfoController);
 
-MyInfoController.$inject = ['MenuService'];
-function MyInfoController(MenuService) {
+MyInfoController.$inject = ['MenuService','ApiPath'];
+function MyInfoController(MenuService, ApiPath) {
   var myInfoCtrl = this;
   myInfoCtrl.userInfo = MenuService.userInfo;
+  myInfoCtrl.basePath = ApiPath;
   console.log('ctrl'+myInfoCtrl.userInfo);
-  // if (MenuService.userInfo === undefined) {
-  //   myInfoCtrl.notSignedUpYet = true;
-  // } else {
-  //   myInfoCtrl.notSignedUpYet = false;
-  // }
 }
 
 })();

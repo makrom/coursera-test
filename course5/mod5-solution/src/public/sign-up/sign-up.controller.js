@@ -9,12 +9,14 @@ function SignUpController(MenuService) {
   var signUpCtrl = this;
   signUpCtrl.submit = function () {
     MenuService.getMenuItem(signUpCtrl.menuNumber).then(function (result) {
+      console.log(result);
       var userInfo = {
         firstName : signUpCtrl.firstName,
         lastName : signUpCtrl.lastName,
         emailAddress : signUpCtrl.emailAddress,
         phoneNumber : signUpCtrl.phoneNumber,
-        menuNumber : signUpCtrl.menuNumber
+        menuNumber : signUpCtrl.menuNumber,
+        menuItemInfo : result
       };
       MenuService.setUserInfo(userInfo);
       signUpCtrl.menuNumberNotExists = false;
